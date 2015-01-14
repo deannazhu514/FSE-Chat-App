@@ -1,0 +1,23 @@
+doctype html
+html
+	head
+		style
+			include style.css
+		title FSE Chatroom
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+		script(src="/socket.io/socket.io.js")
+		script(src="script.js")
+		script(src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js")
+
+	body
+		div.container
+			header
+				button#leaveBut Leave
+				h1 FSE Chatroom
+			div#enterRoom
+				input(type='text')#username
+				button#enterBut Start chatting!
+			div#chatEntries
+			div#chatControls
+				textarea#messageInput
+				button#postBut Post

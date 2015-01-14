@@ -1,0 +1,99 @@
+body {
+	font-family: "Book Antiqua", Georgia, serif;
+}
+
+button::-moz-focus-inner { 
+	border: 0; 
+	padding: 0; 
+	margin:0; 
+}
+
+#enterRoom {
+	font-size: 1em;
+  border-radius: 1em;
+  font-family: sans-serif;
+}
+
+input, button {
+	font-size: inherit;
+	padding: 0.5em;
+
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+button {
+	border: none;
+	border-radius: 2px;
+	font-weight: bold;
+	color: #FFF;
+}
+
+
+#enterBut{
+	background: #2196F3;
+	margin: 0px 20px;
+}
+
+button:hover{
+	opacity: 0.85;
+}
+
+#postBut{
+	background: #E91E63;
+	margin: 10px 20px;
+}
+
+#leaveBut{
+	background: #9E9E9E;
+	float: right;
+}
+
+#chatEntries {
+	margin: 20px 0px;
+	max-height: 500px;
+	overflow: overlay;
+	overflow-y: scroll;
+}
+
+#messageInput, #postBut, #leaveBut {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#messageInput {
+	width: 500px;
+	height: 300px;
+}
+
+.message:nth-child(odd) {
+	background: #E0E0E0;
+}
+
+.message {
+	padding: 5px 10px;
+}
+
+textarea {
+	resize: none;
+	font-family: inherit;
+	font-size: 1.2em;
+}
+
+.user {
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.date {
+	font-size:1em;
+	font-style: italic;
+	color: #9E9E9E;
+}
+
+.msgtxt {
+	font-size:1.2em;
+	margin: 5px 20px;
+}
