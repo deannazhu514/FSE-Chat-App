@@ -1,17 +1,25 @@
+html {
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background: #FFF;
+    background-repeat:no-repeat;
+    background: -webkit-linear-gradient( to top, #BDBDBD, #FFF);
+    background: -moz-linear-gradient( to top, #BDBDBD, #FFF);
+    background: -ms-linear-gradient( to top, #BDBDBD, #FFF);
+    background: -o-linear-gradient( to top, #BDBDBD, #FFF);
+    background: linear-gradient( to top, #BDBDBD, #FFF);
+}
+
+h1 {
+	text-align: center;
+}
+
 body {
 	font-family: "Book Antiqua", Georgia, serif;
-}
-
-button::-moz-focus-inner { 
-	border: 0; 
-	padding: 0; 
-	margin:0; 
-}
-
-#enterRoom {
-	font-size: 1em;
-  border-radius: 1em;
-  font-family: sans-serif;
+	margin: 0px 0px;
 }
 
 input, button {
@@ -30,31 +38,68 @@ button {
 	color: #FFF;
 }
 
-
-#enterBut{
-	background: #2196F3;
-	margin: 0px 20px;
+button::-moz-focus-inner { 
+	border: 0; 
+	padding: 0; 
+	margin:0; 
 }
 
 button:hover{
 	opacity: 0.85;
 }
 
-#postBut{
+textarea {
+	resize: none;
+	font-family: inherit;
+	font-size: 1.2em;
+}
+
+#enterRoom {
+	font-size: 1em;
+  border-radius: 1em;
+  font-family: sans-serif;
+            
+  margin-top: 30%;
+  transform: translate(0, -50%)
+}
+
+#enterRoom * {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#enterBut {
+	background: #2196F3;
+	margin-top: 10px;
+}
+
+#username {
+	color: #000;
+}
+
+::-webkit-input-placeholder { font-style: italic; color:#9E9E9E; }
+::-moz-placeholder { font-style: italic; color:#9E9E9E; }
+:-ms-input-placeholder { font-style: italic; color:#9E9E9E; }
+input:-moz-placeholder { font-style: italic; color:#9E9E9E; }
+
+#postBut {
 	background: #E91E63;
 	margin: 10px 20px;
 }
 
-#leaveBut{
+#leaveBut {
 	background: #9E9E9E;
 	float: right;
+	position: relative;
+	right: 20px;
 }
 
 #chatEntries {
 	margin: 20px 0px;
 	max-height: 500px;
-	overflow: overlay;
 	overflow-y: scroll;
+	overflow: overlay;
 }
 
 #messageInput, #postBut, #leaveBut {
@@ -64,6 +109,7 @@ button:hover{
 }
 
 #messageInput {
+	margin-top: 30px;
 	width: 500px;
 	height: 300px;
 }
@@ -72,14 +118,16 @@ button:hover{
 	background: #E0E0E0;
 }
 
-.message {
-	padding: 5px 10px;
+.message:nth-child(even) {
+	background: #FFF;
 }
 
-textarea {
-	resize: none;
-	font-family: inherit;
-	font-size: 1.2em;
+#chatControls{
+	border-top: 3px double gray;
+}
+
+.message {
+	padding: 5px 10px;
 }
 
 .user {

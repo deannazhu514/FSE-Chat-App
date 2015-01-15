@@ -1,10 +1,18 @@
 var socket = io.connect();
 
-/*$("#enterBut").keyup(function(event) {
-	if(event.keyCode == 13){
-		$("#enterBut").click();
+function enterRoom(){
+	if ($("#username").val() != "") {
+		socket.emit('new user', $("#username").val());
+		
+		$('#leaveBut').show();
+		$('#username').hide();
+		$('#enterRoom').hide();	
+		$('#chatEntries').show();
+		$('#chatControls').show();	
+
+		$('#username').val("");
 	}
-})*/
+}
 
 function addMessage(user, text, date){
 	var date = new Date(date);
@@ -23,23 +31,16 @@ function postMessage(){
 		var date = new Date();
 		socket.emit('message', {text: text, date: date});
 		addMessage("Me", text, date);
-
+		$("#chatEntries").scrollTop($("#chatEntries")[0].scrollHeight);
 		$('#messageInput').val("");
 	}
 }
 
-function enterRoom(){
-	if ($("#username").val() != "") {
-		socket.emit('new user', $("#username").val());
-		
-		$('#leaveBut').show();
-		$('#username').hide();
-		$('#enterRoom').hide();	
-		$('#chatEntries').show();
-		$('#chatControls').show();	
-		var input = document.getElementById("messageInput").focus();
-		$('#username').val("");
-	}
+function inputKeyUp(e) {
+    e.which = e.which || e.keyCode;
+    if(e.which == 13) {
+    	postMessage();
+    }
 }
 
 function leaveRoom(){
@@ -51,15 +52,17 @@ function leaveRoom(){
 	$('#chatEntries').hide();
 	$('#chatControls').hide();
 	$('#chatEntries').empty();
+
+	$('#messageInput').val("");
 }
 
 socket.on('login', function(data) {
 	var messages = data.messages;
 	for (var i = 0; i < messages.length; i++) {
 		var message = messages[i];
-		console.log(message);
 		addMessage(message.user, message.text, message.date);
 	}
+	$("#chatEntries").scrollTop($("#chatEntries")[0].scrollHeight);
 })
 
 socket.on('message', function(data) {
@@ -68,15 +71,15 @@ socket.on('message', function(data) {
 
 socket.on('leave room', function(data) {
 	$("#chatEntries").append(
-		'<div class="leavemessage"><p>' + data['username'] + ' left the room.' + '</p></div>'
+		'<div class="leavemessage"><p>' + data['username'] + ' hast left the room.' + '</p></div>'
 	);
 })
 
 $(function(){
-	var input = document.getElementById("enterBut").focus();
+/*	var input = document.getElementById("enterBut").focus();*/
 	$('#leaveBut').hide();
 	$("#chatControls").hide();
-	$("#enterRoom").click(function() {enterRoom()});
+	$("#enterBut").click(function() {enterRoom()});
 	$("#postBut").click(function() {postMessage()});
 	$("#leaveBut").click(function() {leaveRoom()});
 })

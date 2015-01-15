@@ -12,12 +12,12 @@ html
 	body
 		div.container
 			header
-				button#leaveBut Leave
-				h1 FSE Chatroom
+				button#leaveBut.centered Leave
+				h1.centered FSE Chatroom
 			div#enterRoom
-				input(type='text')#username
+				input(type='text', placeholder='Enter a name')#username
 				button#enterBut Start chatting!
 			div#chatEntries
 			div#chatControls
-				textarea#messageInput
+				textarea(onkeyup="inputKeyUp(event)")#messageInput
 				button#postBut Post

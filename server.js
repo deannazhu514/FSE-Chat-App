@@ -14,7 +14,6 @@ app.get('/', function(req, res){
 });
 
 var users = {};
-var numUsers = 0;
 
 function Message (user, text, date) {
 	this.user = user;
@@ -30,19 +29,15 @@ io.sockets.on('connection', function(socket) {
 	var addedUser = false;
 
 	socket.on('new user', function(username){
-		console.log(socket.username + " entered");
 		socket.username = username;
 		users[username] = username;
-		++numUsers;
 		addedUser = true;
 		socket.emit('login', {
-			numUsers : numUsers,
 			messages: messages
 		});
 
 		socket.broadcast.emit('user joined', {
-			username: socket.username,
-			numUsers : numUsers
+			username: socket.username
 		});
 	});
 
