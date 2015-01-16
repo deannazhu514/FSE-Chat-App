@@ -84,7 +84,7 @@ textarea {
 input:-moz-placeholder { font-style: italic; color:#9E9E9E; }
 
 #postBut {
-	background: #E91E63;
+	background: #03A9F4;
 	margin: 10px 20px;
 }
 
@@ -116,6 +116,10 @@ input:-moz-placeholder { font-style: italic; color:#9E9E9E; }
 
 .message:nth-child(odd) {
 	background: #E0E0E0;
+}
+
+.self .user{
+	color: #03A9F4;
 }
 
 .message:nth-child(even) {

@@ -1,9 +1,11 @@
 var socket = io.connect();
+var user = '';
 
 function enterRoom(){
 	if ($("#username").val() != "") {
+		user = $("#username").val();
 		socket.emit('new user', $("#username").val());
-		
+	
 		$('#leaveBut').show();
 		$('#username').hide();
 		$('#enterRoom').hide();	
@@ -14,15 +16,26 @@ function enterRoom(){
 	}
 }
 
-function addMessage(user, text, date){
+function addMessage(user, text, date, self){
 	var date = new Date(date);
-	$("#chatEntries").append(
-		'<div class="message">'
-			+ '<div class="user">' + user + '</div>'
-			+ '<div class="date">' + moment(date).format("MMMM Do YYYY, h:mm:ss a") + '</div>'
-			+ '<div class="msgtxt">' + text + '</div>'
-		+'</div>'
-		)
+	if (self) {
+		$("#chatEntries").append(
+			'<div class="message self">'
+				+ '<div class="user">' + user + '</div>'
+				+ '<div class="date">' + moment(date).format("MMMM Do YYYY, h:mm:ss a") + '</div>'
+				+ '<div class="msgtxt">' + text + '</div>'
+			+'</div>'
+			)
+	} else {
+		$("#chatEntries").append(
+			'<div class="message">'
+				+ '<div class="user">' + user + '</div>'
+				+ '<div class="date">' + moment(date).format("MMMM Do YYYY, h:mm:ss a") + '</div>'
+				+ '<div class="msgtxt">' + text + '</div>'
+			+'</div>'
+			)
+	}
+	$("#chatEntries").scrollTop($("#chatEntries")[0].scrollHeight);
 ;}
 
 function postMessage(){
@@ -30,8 +43,7 @@ function postMessage(){
 		var text = $('#messageInput').val();
 		var date = new Date();
 		socket.emit('message', {text: text, date: date});
-		addMessage("Me", text, date);
-		$("#chatEntries").scrollTop($("#chatEntries")[0].scrollHeight);
+		addMessage(user, text, date, true);
 		$('#messageInput').val("");
 	}
 }
@@ -45,7 +57,7 @@ function inputKeyUp(e) {
 
 function leaveRoom(){
 	socket.emit('leave room');
-	
+
 	$('#leaveBut').hide();
 	$('#username').show();
 	$('#enterRoom').show();	
@@ -54,13 +66,14 @@ function leaveRoom(){
 	$('#chatEntries').empty();
 
 	$('#messageInput').val("");
+	user = '';
 }
 
 socket.on('login', function(data) {
 	var messages = data.messages;
 	for (var i = 0; i < messages.length; i++) {
 		var message = messages[i];
-		addMessage(message.user, message.text, message.date);
+		addMessage(message.user, message.text, message.date, false);
 	}
 	$("#chatEntries").scrollTop($("#chatEntries")[0].scrollHeight);
 })
@@ -71,14 +84,15 @@ socket.on('message', function(data) {
 
 socket.on('leave room', function(data) {
 	$("#chatEntries").append(
-		'<div class="leavemessage"><p>' + data['username'] + ' hast left the room.' + '</p></div>'
+		'<div class="leavemessage"><p>' + data['username'] + ' has left the room.' + '</p></div>'
 	);
 })
 
 $(function(){
-/*	var input = document.getElementById("enterBut").focus();*/
 	$('#leaveBut').hide();
 	$("#chatControls").hide();
+	$("#chatEntries").hide();
+	
 	$("#enterBut").click(function() {enterRoom()});
 	$("#postBut").click(function() {postMessage()});
 	$("#leaveBut").click(function() {leaveRoom()});
