@@ -12,4 +12,4 @@ socket.io
 jade
 
 
-video DEMO: http://youtu.be/_hyc6A12Zn4
+video DEMO: https://www.youtube.com/watch?v=_hyc6A12Zn4&feature=youtu.be
